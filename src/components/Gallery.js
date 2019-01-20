@@ -21,13 +21,12 @@ const Gallery = (props) => {
     } else {
         galleryItems = <NoResults />
     }
-    console.log(data);
 
     
     
     return (
         <div className="photo-container">
-            <h2>Results</h2>
+            <h2>{props.results}</h2>
             <ul>
                 {galleryItems}
             </ul>

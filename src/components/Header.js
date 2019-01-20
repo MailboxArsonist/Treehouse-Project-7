@@ -11,7 +11,9 @@ class Header extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        console.log(this.history)
         this.props.search(this.state.searchInput);
+  
     }
 
     render(){
