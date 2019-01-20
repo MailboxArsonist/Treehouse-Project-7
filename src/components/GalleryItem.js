@@ -1,8 +1,10 @@
 import React from 'react';
 
-const GalleryItem = () => {
+const GalleryItem = (props) => {
     return (
-        <h1>This is the GalleryItem</h1>
+        <li>
+            <img src={`https://farm${props.farmId}.staticflickr.com/${props.serverId}/${props.id}_${props.secret}.jpg`} alt={props.alt} />
+        </li>
     );
 }
 

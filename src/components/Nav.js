@@ -2,7 +2,13 @@ import React from 'react';
 
 const Nav = () => {
     return (
-        <h1>This is the Nav</h1>
+        <nav className="main-nav">
+            <ul>
+            <li><a href='#'>Cats</a></li>
+            <li><a href='#'>Angry Cats</a></li>
+            <li><a href='#'>Happy Cats</a></li>
+            </ul>
+        </nav>
     );
 }
 

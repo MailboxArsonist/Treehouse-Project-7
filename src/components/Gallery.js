@@ -1,8 +1,37 @@
 import React from 'react';
+import GalleryItem from './GalleryItem'
+import NoResults from './NoResults'
 
-const Gallery = () => {
+const Gallery = (props) => {
+    const data = props.photos;
+    let galleryItems;
+
+    if(data.length > 0){
+        galleryItems = data.map((img, index) => {
+            return (
+                <GalleryItem 
+                  key={index} 
+                  farmId={img.farm} 
+                  serverId={img.server} 
+                  id={img.id} 
+                  secret={img.secret} 
+                  alt={img.title} />
+            );
+        })
+    } else {
+        galleryItems = <NoResults />
+    }
+    console.log(data);
+
+    
+    
     return (
-        <h1>This is the Gallery</h1>
+        <div className="photo-container">
+            <h2>Results</h2>
+            <ul>
+                {galleryItems}
+            </ul>
+        </div>
     );
 }
 
