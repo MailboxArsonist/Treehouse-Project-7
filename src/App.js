@@ -82,7 +82,7 @@ class App extends Component {
               );
             }}/>
 
-            <Route exact path="/search/:query" render={() => {
+            <Route exact path="/search/:id" render={() => {
               return(
                 <>
                   <Header search={this.callFlickr}/>

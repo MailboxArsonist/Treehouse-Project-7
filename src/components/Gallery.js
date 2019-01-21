@@ -19,7 +19,7 @@ const Gallery = (props) => {
                   id={img.id} 
                   secret={img.secret} 
                   alt={img.title} />
-            );
+            );  
         })
         //If data is empty, render no results found component
     } else {
@@ -30,8 +30,8 @@ const Gallery = (props) => {
     
     return (
         <div className="photo-container">
-            {/* {Topic prop will hold the title} */}
-            <h2>{props.topic}</h2>
+            {/* {Topic prop will hold the title, check to see if galleryItems holds the noresults component} */}
+            {React.isValidElement(galleryItems) ? <h2>Oh no!</h2>: <h2>Images of: {props.topic}</h2>}
             <ul>
                 {galleryItems}
             </ul>

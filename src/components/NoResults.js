@@ -2,7 +2,7 @@ import React from 'react';
 
 const NoResults = () => {
     return (
-        <h3>Sorry, there weren't any results found.</h3>
+        <li className="not-found">Sorry, there weren't any results found.</li>
     );
 }
 
