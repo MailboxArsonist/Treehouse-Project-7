@@ -5,7 +5,6 @@ import api from './config.js';
 
 //import components
 import Header from './components/Header';
-import Nav from './components/Nav';
 import Gallery from './components/Gallery';
 import axios from 'axios';
 
@@ -51,12 +50,8 @@ class App extends Component {
          })
          .catch(error => {
            console.log('Error fetching and parsing data', error);
-         });
-         const path = `/search/${this.state.searchInput}`;
-        console.log(this.history)
-         
+         });       
   }
-//this is a comment
 
 
   render() {
@@ -64,18 +59,56 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="container">
-          <Header search={this.callFlickr}/>
-          <Nav />
           <Switch>
-            <Route exact path="/" render={() => <Gallery photos={mainDisplayPhotos} results="Here are some photos of cats, dogs and dragons"/>}/>
-            <Route path="/cats" render={() => <Gallery photos={this.state.cats} results="Cats"/>}/>
-            <Route path="/dogs" render={() => <Gallery photos={this.state.dogs} results="Dogs"/>}/>
-            <Route path="/dragons" render={() => <Gallery photos={this.state.dragons} results="Dragons"/>}/>
-            <Route path="/search/:query" render={() => <Gallery photos={this.state.searchResults} results="Results"/>}/>
+            <Route exact path="/" component={() => {
+              return(
+                <>
+                <Header search={this.callFlickr}/>
+                <Gallery photos={mainDisplayPhotos} results="Here are some photos of cats, dogs and dragons"/>
+                </>
+              );
+            }}/>
+            <Route path="/cats" component={() => {
+              return(
+                <>
+                <Header search={this.callFlickr}/>
+                <Gallery photos={this.state.cats} results="Cats"/>
+                </>
+              );
+
+            }}/>
+            <Route path="/dogs" component={() => {
+              return(
+                <>
+                  <Header search={this.callFlickr}/>
+                  <Gallery photos={this.state.dogs} results="Dogs"/>
+                </>
+              );
+
+            }}/>
+            <Route path="/dragons" component={() => {
+              return(
+                <>
+                  <Header search={this.callFlickr}/>
+                  <Gallery photos={this.state.dragons} results="Dragons"/>
+                </>
+              );
+            }}/>
+            <Route path="/search/:query" component={() => {
+              return(
+                <>
+                  <Header search={this.callFlickr}/>
+                  <Gallery photos={this.state.searchResults} results="Results"/>
+                </>
+              );
+
+            }}/>
           </Switch>
 
         </div>
       </BrowserRouter>
+
+      // {<Header search={this.callFlickr}/>}
     
 
 
