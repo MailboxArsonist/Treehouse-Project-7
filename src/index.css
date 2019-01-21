@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300i');
+
+
 body {
   text-align: center;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: #3f4850;
 }
 
@@ -27,7 +30,7 @@ a {
 
 .search-form button {
   outline: none;
-  background-color: #438bbd;
+  background-color: #04A777;
   border: none;
   padding: 0px 15px;
   border-radius: 0 0.35em 0.35em 0;
@@ -52,7 +55,7 @@ input {
 
 .main-nav a {
   display: block;
-  background: #438bbd;
+  background: #04A777;
   border-radius: 3px;
   padding: 5px;
   color: #fff;
@@ -61,7 +64,7 @@ input {
 .main-nav .active,
 .main-nav a:hover,
 .search-form button:hover {
-  background-color: #275270;
+  background-color: #A7E8BD;
 }
 
 .photo-container ul {
@@ -81,6 +84,7 @@ input {
 
 .photo-container ul img {
   width: 100%;
+  height: 100%;
   transform: scale(1.25);
   transition: transform 1.25s;
 }
@@ -91,6 +95,15 @@ input {
 
 .photo-container .not-found {
   width: 100%;
+}
+
+.spinner {
+  width: auto;
+  height: 200px;
+}
+
+.loading {
+  margin: 10px, 40px;
 }
 
 @media only screen and (max-width: 767px)  {
