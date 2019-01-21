@@ -7,46 +7,32 @@ import api from './config.js';
 import Header from './components/Header';
 import Gallery from './components/Gallery';
 import axios from 'axios';
+import NotFound from './components/NotFound.js';
+import Loading from './components/Loading';
 
 
 class App extends Component {
 
   state = {
     searchResults : [],
-    cats: [],
-    dogs: [],
-    dragons: []
+    leaves: [],
+    forest: [],
+    sunset: [],
+    loading: false
   }
 
   componentDidMount(){
-    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api}&tags=cats&per_page=24&format=json&nojsoncallback=1`)
-         .then(response => {
-           this.setState( {cats : response.data.photos.photo} )
-         })
-         .catch(error => {
-           console.log('Error fetching and parsing data', error);
-         });
-    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api}&tags=dogs&per_page=24&format=json&nojsoncallback=1`)
-         .then(response => {
-           this.setState( {dogs : response.data.photos.photo} )
-         })
-         .catch(error => {
-           console.log('Error fetching and parsing data', error);
-         });
-    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api}&tags=dragons&per_page=24&format=json&nojsoncallback=1`)
-         .then(response => {
-           this.setState( {dragons : response.data.photos.photo} )
-         })
-         .catch(error => {
-           console.log('Error fetching and parsing data', error);
-         });
+    this.callFlickr('leaves', 'leaves');
+    this.callFlickr('forest', 'forest');
+    this.callFlickr('sunset', 'sunset');
   }
 
 
-  callFlickr = (input) => {
+  callFlickr = (input, stateToUpdate) => {
+    this.setState( { loading: true} )
     axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api}&tags=${input}&per_page=24&format=json&nojsoncallback=1`)
          .then(response => {
-           this.setState( {searchResults : response.data.photos.photo} )
+           this.setState( {[stateToUpdate] : response.data.photos.photo, loading: false} )
          })
          .catch(error => {
            console.log('Error fetching and parsing data', error);
@@ -55,7 +41,7 @@ class App extends Component {
 
 
   render() {
-    const mainDisplayPhotos = [...this.state.cats, ...this.state.dogs, ...this.state.dragons,]
+    const mainDisplayPhotos = [...this.state.leaves, ...this.state.forest, ...this.state.sunset];
     return (
       <BrowserRouter>
         <div className="container">
@@ -63,34 +49,34 @@ class App extends Component {
             <Route exact path="/" component={() => {
               return(
                 <>
-                <Header search={this.callFlickr}/>
-                <Gallery photos={mainDisplayPhotos} results="Here are some photos of cats, dogs and dragons"/>
+                  <Header search={this.callFlickr}/>
+                  {this.state.loading ? <Loading /> : <Gallery photos={mainDisplayPhotos} results="Here are some photos of Leaves, Forests and Sunsets"/> }
                 </>
               );
             }}/>
-            <Route path="/cats" component={() => {
+            <Route path="/leaves" component={() => {
               return(
                 <>
-                <Header search={this.callFlickr}/>
-                <Gallery photos={this.state.cats} results="Cats"/>
+                  <Header search={this.callFlickr}/>
+                  {this.state.loading ? <Loading /> : <Gallery photos={this.state.leaves} results="Leaves"/>}
                 </>
               );
 
             }}/>
-            <Route path="/dogs" component={() => {
+            <Route path="/forest" component={() => {
               return(
                 <>
                   <Header search={this.callFlickr}/>
-                  <Gallery photos={this.state.dogs} results="Dogs"/>
+                  {this.state.loading ? <Loading /> : <Gallery photos={this.state.forest} results="Forest"/>}
                 </>
               );
 
             }}/>
-            <Route path="/dragons" component={() => {
+            <Route path="/sunset" component={() => {
               return(
                 <>
                   <Header search={this.callFlickr}/>
-                  <Gallery photos={this.state.dragons} results="Dragons"/>
+                  {this.state.loading ? <Loading /> : <Gallery photos={this.state.sunset} results="Sunset"/>}
                 </>
               );
             }}/>
@@ -98,20 +84,16 @@ class App extends Component {
               return(
                 <>
                   <Header search={this.callFlickr}/>
-                  <Gallery photos={this.state.searchResults} results="Results"/>
+                  {this.state.loading ? <Loading /> : <Gallery photos={this.state.searchResults} results="Results"/>}
                 </>
               );
 
             }}/>
+            <Route component={NotFound}/>
           </Switch>
 
         </div>
       </BrowserRouter>
-
-      // {<Header search={this.callFlickr}/>}
-    
-
-
     );
   }
 }
