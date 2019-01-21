@@ -1,5 +1,19 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Hello! Welcome to my project 7 for the Treehouse FSJS TD. This is an image gallery that makes requests to the flickr API. It will display 24 images from the flickr API, there is also a search function which will make a request to the flickr api and display images based on the search input. There are also 3 default buttons to display images for.
+
+To run the app you will need to set up a config.js file and have your own API key from Flickr. Set up the config file in the root directory and should be formatted like so:
+
+const api = 'API KEY GOES HERE';
+export default api;
+
+
+You will also need to install the packages used on this projects, which are listed in package.json.
+
+npm install     <--- This is the command to use to install the correct dependencies.
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
