@@ -6,10 +6,11 @@ import SearchForm from './SearchForm';
 
 
 const Header = (props) => {
+    //Render searchform and nav
     return (
         <>
-        <SearchForm search={props.search}/>
-        <Nav />
+          <SearchForm search={props.search}/>{/*props.search is callFlickr function in app.js.*/}
+          <Nav />
         </>
 
     );

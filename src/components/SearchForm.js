@@ -6,17 +6,17 @@ class SearchForm extends Component {
     state = {
         searchInput: ''
     }
-
+    //Updates searchInput with the contents of the search field
     handleInput = (e) => {
-        this.setState({searchInput: e.target.value})
+        this.setState({searchInput: e.target.value.toLowerCase()})
     }
-
+    //Calls the CallFlickr function that was passed via props from app.js
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.search(this.state.searchInput, 'searchResults');
+        //create url path for search results and push into history object
         const path = `/search/${this.state.searchInput}`;
         this.props.history.push(path);
-  
     }
 
     render(){
